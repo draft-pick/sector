@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="title">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <section class="create">
+        <div class="container">
+            <div class="create__row">
+                {% if is_type %}
+                    <div class="type_area">
+                        <ol>
+                            {% for type in types %}
+                                <li>{{ type.title }}</li>
+                            {% endfor %}
+                        </ol>
+
+                    <form method="post"
+                          enctype="multipart/form-data"
+                          action="{% url 'main:create_type' %}">
+                        {% csrf_token %}
+                        {% for field in type_form %}
+                            <div class="form-group row my-3">
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="red">
+                                <i class="fa-regular fa-file-import"></i> Создать
+                            </button>
+                        </div>
+                    </form>
+                                        </div>
+                {% elif not is_type %}
+                    <form method="post"
+                          enctype="multipart/form-data"
+                          action="{% url 'main:create' %}">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group row my-3">
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                </label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                Добавить
+                            </button>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

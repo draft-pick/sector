@@ -1,0 +1,39 @@
+<nav class="nav">
+    <div class="container">
+        <div class="nav__row">
+            <div class="logo">
+                <a href="/">
+                    <img src="/static/img/logo.svg" alt="logo">
+                    <span>SecTor</span>
+                </a>
+            </div>
+            <div class="navigation-list">
+                <ul>
+                    <li>
+                        <button class="user unit" type="button">
+                            <div class="icon">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div class="info">
+                                <div>Андрей Хахалин</div>
+                                <div class="rules">администратор</div>
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <div class="btn-more">
+                            <button class="unit" type="button"><i class="fa-solid fa-ellipsis-vertical"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <ul>
+                                    <li><a href="{% url 'main:create' %}"><i class="fa-solid fa-file"></i> Добавить документ</a></li>
+                                    <li><a href="{% url 'main:create_type' %}"><i class="fa-solid fa-folder"></i> Добавить тип</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

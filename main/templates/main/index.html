@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="search">
+        <div class="container">
+            <div class="search__row">
+                <label for="search">
+                    <img src="/static/img/icons/search.svg" alt="search">
+                </label>
+                <input type="text" id="search" placeholder="...Поиск...">
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="slider_main">
+        <div class="container">
+            <div class="slider_main__row">
+                <div class="owl-carousel main">
+                    {% for document in documents %}
+
+                        <div class="main__item">
+                            <div class="header">
+                                <div class="type">{{ document.type }}</div>
+                                <div class="date">{{ document.date_create }}</div>
+                            </div>
+                            <div class="title">
+                                {{ document.title|slice:":150"}}
+                            </div>
+                            <div class="footer">
+                                <div class="number">№ - {{ document.number }}</div>
+                                <div class="more"><img src="/static/img/icons/arrow-right.svg" alt=""></div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,19 @@
+// Base
+@import "base/reset";
+@import "base/vars";
+@import "base/base";
+@import "base/buttons";
+
+
+
+//MAIN PAGE
+@import "blocks/nav";
+@import "blocks/logo";
+@import "blocks/navigation-list";
+@import "blocks/search";
+@import "blocks/slider_main";
+@import "blocks/counter";
+
+//CREATE PAGE
+@import "blocks/create/forms";
+@import "blocks/create/list";

@@ -1,0 +1,39 @@
+.search__row {
+    text-align: center;
+    margin-top: 50px;
+    position: relative;
+
+    label {
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        background-color: #fff;
+        border-radius: 15px;
+        margin-right: 7px;
+        position: absolute;
+
+
+        img {
+            padding-top: 10px;
+        }
+    }
+    input {
+        height: 50px;
+        width: 500px;
+        border-radius: 15px;
+        margin-left: 60px;
+        padding: 0 20px 0 20px;
+
+
+        &::placeholder {
+            color: #A1A1A1;
+            padding-left: 10px;
+            letter-spacing: .1rem;
+
+        }
+        @media screen and (max-width: #{$screen-xs-max}) {
+            width: 400px;
+        }
+    }
+
+}
