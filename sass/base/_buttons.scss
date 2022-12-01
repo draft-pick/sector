@@ -66,6 +66,16 @@ button {
         color: #61677C;
       }
     }
+
+  }
+
+  &.more {
+    height: 100%;
+  }
+
+  &.logo {
+    width: 100%;
+    display: flex;
   }
 
   &.red {

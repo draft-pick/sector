@@ -115,6 +115,13 @@ button.user .info .rules {
   text-align: right;
   color: #61677C;
 }
+button.more {
+  height: 100%;
+}
+button.logo {
+  width: 100%;
+  display: flex;
+}
 button.red {
   display: block;
   width: 100%;
@@ -159,6 +166,7 @@ button.red {
 .navigation-list .btn-more {
   position: relative;
   display: inline-block;
+  height: 100%;
 }
 .navigation-list .dropdown-content {
   display: none;
