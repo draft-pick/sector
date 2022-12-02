@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 
@@ -47,4 +47,16 @@ def create_type(request):
         'is_type': True,
     }
     return render(request, 'main/create.html', context)
+
+
+@login_required()
+def detail(request, doc_id):
+    pass
+    # document = get_object_or_404(Documents, pk=doc_id)
+    # context = {
+    #     'title': document.title,
+    #     'document': document
+    # }
+    # render(request, 'main/detail.html', context)
+
 
