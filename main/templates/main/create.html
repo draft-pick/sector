@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <div class="title">
-            <h1>{{ title }}</h1>
-        </div>
-    </div>
+    {% include '_include/_title.html' %}
     <section class="create">
         <div class="container">
             <div class="create__row">
@@ -17,24 +13,24 @@
                             {% endfor %}
                         </ol>
 
-                    <form method="post"
-                          enctype="multipart/form-data"
-                          action="{% url 'main:create_type' %}">
-                        {% csrf_token %}
-                        {% for field in type_form %}
-                            <div class="form-group row my-3">
-                                <label for="{{ field.id_for_label }}">
-                                    {{ field }}
-                                </label>
+                        <form method="post"
+                              enctype="multipart/form-data"
+                              action="{% url 'main:create_type' %}">
+                            {% csrf_token %}
+                            {% for field in type_form %}
+                                <div class="form-group row my-3">
+                                    <label for="{{ field.id_for_label }}">
+                                        {{ field }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="red">
+                                    <i class="fa-regular fa-file-import"></i> Создать
+                                </button>
                             </div>
-                        {% endfor %}
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="red">
-                                <i class="fa-regular fa-file-import"></i> Создать
-                            </button>
-                        </div>
-                    </form>
-                                        </div>
+                        </form>
+                    </div>
                 {% elif not is_type %}
                     <form method="post"
                           enctype="multipart/form-data"

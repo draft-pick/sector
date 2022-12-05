@@ -319,7 +319,7 @@ button.red {
 }
 
 .counter {
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 .counter__row {
@@ -383,6 +383,37 @@ input:focus {
 
 .type_area {
   display: flex;
+}
+
+.detail_area__row {
+  display: flex;
+}
+.detail_area__row .info {
+  padding: 20px;
+  width: 66%;
+  margin-right: 50px;
+  color: #61677C;
+  box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  font-size: 18px;
+}
+.detail_area__row .info button {
+  margin: 0 7px 10px 0;
+  color: #AE1100;
+  width: 50px;
+  height: 50px;
+  font-weight: 400;
+}
+.detail_area__row .info:hover {
+  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+}
+.detail_area__row .include_doc {
+  width: 34%;
+}
+.detail_area__row .include_doc li {
+  margin-bottom: 10px;
+  padding: 20px;
+  box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
 }
 
 /*# sourceMappingURL=main.css.map */

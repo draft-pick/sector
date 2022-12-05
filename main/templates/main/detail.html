@@ -1,6 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% include '_include/_title.html' %}
 
+    <section class="detail_area">
+        <div class="container">
+            <div class="detail_area__row">
+                <div class="info">
+                    <ul>
+                        <li>
+                            <button><i class="fa-light fa-folder-open"></i></button>
+                            {{ document.type }}
+                        </li>
+                        <li>
+                            <button><i class="fa-light fa-file"></i></button>
+                            {{ document.title }}</li>
+                        <li>
+                            <button>№</button>
+                            {{ document.number }}</li>
+                        <li>
+                            <button><i class="fa-light fa-calendar-days"></i></button>
+                            {{ document.date_create }}</li>
+                        <li>
+                            <button><i class="fa-light fa-clock"></i></button>
+                            {{ document.pub_date }}</li>
+                        <li>
+                            <button><i
+                                    class="fa-light fa-user"></i></button>
+                            {{ document.author.first_name }} {{ document.author.last_name }}
+                        </li>
+                    </ul>
 
-{%  endblock %}
+                </div>
+                <div class="include_doc">
+                    <ul>
+                        {% for include_doc in document.main_document.all %}
+                            {% if include_doc %}
+                                <li><a href="{% url 'main:detail' include_doc.pk %}">{{ include_doc.title }}</a></li>
+                            {% else %}
+                                no
+                            {% endif %}
+                        {% endfor %}
+                    <li><a href="{% url 'main:create' %}">Внести изменения</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

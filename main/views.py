@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Count, Q
+from django.views.generic import ListView
 
 from .models import Type, Documents
 from .forms import TypeForm, DocumentForm
@@ -10,9 +11,21 @@ from .forms import TypeForm, DocumentForm
 def index(request):
     """Главная страница."""
     documents = Documents.objects.all()
+    types = Type.objects.annotate(sum_documents=Count('type_document'))
+
+    def count_documents():
+        sum_count = []
+
+        for type in types:
+            if type.sum_documents > 0:
+                sum_count.append(type.sum_documents)
+        return sum_count
+
     context = {
         'title': 'Главная страница',
         'documents': documents,
+        'types': types,
+        'type_count': count_documents()
     }
     return render(request, 'main/index.html', context)
 
@@ -51,12 +64,20 @@ def create_type(request):
 
 @login_required()
 def detail(request, doc_id):
-    pass
-    # document = get_object_or_404(Documents, pk=doc_id)
-    # context = {
-    #     'title': document.title,
-    #     'document': document
-    # }
-    # render(request, 'main/detail.html', context)
+    document = get_object_or_404(Documents, pk=doc_id)
+    context = {
+        'title': document.title,
+        'document': document
+    }
+    return render(request, 'main/detail.html', context)
 
 
+@login_required()
+class SearchResultsView(ListView):
+    model = Documents
+    template_name = 'main/search_results.html'
+
+    def get_queryset(self):  # новый
+        return Documents.objects.filter(
+            Q(name__icontains='Boston') | Q(state__icontains='NY')
+        )
