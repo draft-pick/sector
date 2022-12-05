@@ -36,6 +36,7 @@ def create(request):
     form = DocumentForm(request.POST or None)
     if form.is_valid():
         document = form.save(commit=False)
+        document.author = request.user
         document.save()
         return redirect('main:index')
     context = {

@@ -5,18 +5,14 @@ from django.contrib.auth.views import (
     LoginView,
 )
 
-from . import views
-
 app_name = 'users'
 
 urlpatterns = [
-    path('signup/', views.SingUp.as_view(), name='signup'),
     path('logout/',
-         LogoutView.as_view(template_name='users/logged_out.html'),
+         LogoutView.as_view(template_name='users/logged_out.html', extra_context={'title':'Вы вышли из своей учётной записи'}),
          name='logout'),
     path(
         'login/',
-        LoginView.as_view(template_name='users/login.html'),
-        name='login'
-    ),
+        LoginView.as_view(template_name='users/login.html', extra_context={'title':'Авторизация'}),
+        name='login'),
 ]

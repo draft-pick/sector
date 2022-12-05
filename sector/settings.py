@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "main",
+    "users",
+    "core.apps.CoreConfig",
 ]
 
 MIDDLEWARE = [
@@ -103,6 +105,9 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+LOGIN_URL = "users:login"
+LOGIN_REDIRECT_URL = "main:index"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
