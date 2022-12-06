@@ -11,23 +11,25 @@
                 <ul>
                     {% if user.is_authenticated %}
                         <li>
-                            <button class="user unit" type="button">
-                                <div class="icon">
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
-                                <div class="info">
-                                    <div>{{ user.first_name }} {{ user.last_name }}</div>
-                                    <div class="rules">
-                                        {% for role in user.user_role.all %}
-                                            {% if role.roles == 'ADMIN' %}
-                                                Администратор
-                                            {% elif role.roles == 'USER' %}
-                                                Пользователь
-                                            {% endif %}
-                                        {% endfor %}
+                            <a href="{% url 'main:detail_user' user.pk %}">
+                                <button class="user unit" type="button">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-user"></i>
                                     </div>
-                                </div>
-                            </button>
+                                    <div class="info">
+                                        <div>{{ user.first_name }} {{ user.last_name }}</div>
+                                        <div class="rules">
+                                            {% for role in user.user_role.all %}
+                                                {% if role.roles == 'ADMIN' %}
+                                                    Администратор
+                                                {% elif role.roles == 'USER' %}
+                                                    Пользователь
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </button>
+                            </a>
                         </li>
                         <li>
                             <div class="btn-more">
@@ -35,10 +37,16 @@
                                 </button>
                                 <div class="dropdown-content">
                                     <ul>
-                                        <li><a href="{% url 'main:create' %}"><i class="fa-solid fa-file"></i> Добавить
-                                            документ</a></li>
-                                        <li><a href="{% url 'main:create_type' %}"><i class="fa-solid fa-folder"></i>
-                                            Добавить тип</a></li>
+                                        {% if perms.main.add_documents %}
+                                            <li><a href="{% url 'main:create' %}"><i class="fa-solid fa-file"></i>
+                                                Добавить
+                                                документ</a></li>
+                                        {% endif %}
+                                        {% if perms.main.add_type %}
+                                            <li><a href="{% url 'main:create_type' %}"><i
+                                                    class="fa-solid fa-folder"></i>
+                                                Добавить тип</a></li>
+                                        {% endif %}
                                         <li><a href="{% url 'users:logout' %}"><i
                                                 class="fa-solid fa-right-from-bracket"></i> Выход</a></li>
                                     </ul>

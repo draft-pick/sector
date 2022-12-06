@@ -53,3 +53,20 @@ class Documents(models.Model):
         ordering = ['-pub_date']
         verbose_name = 'Документ'
         verbose_name_plural = 'Документы'
+
+
+class Favorites(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='favorite_user',
+    )
+    document = models.ForeignKey(
+        Documents,
+        on_delete=models.CASCADE,
+        related_name='favorite_doc',
+    )
+
+    class Meta:
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        {% for fav in user.favorite_user.all %}
+            <button class="w-100 mb-1">
+                <div>{{ fav.document }}</div>
+                <div>
+                    {% if fav.document.pk in favorites %}
+                        <object>
+                            <a href="{% url 'main:doc_unfavorite' fav.document.pk %}"
+                               class="favorites" style="font-size:28px;color: darkred;">
+                                <i class="fa-sharp fa-solid fa-heart"></i>
+                            </a>
+                        </object>
+                    {% else %}
+                        <object>
+                            <a href="{% url 'main:doc_favorite' fav.document.pk %}"
+                               class="favorites"
+                               style="font-size:28px;color: lightgray;">
+                                <i class="fa-sharp fa-solid fa-heart"></i>
+                            </a>
+                        </object>
+                    {% endif %}
+                </div>
+            </button>
+        {% endfor %}
+    </div>
+{% endblock %}
