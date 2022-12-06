@@ -37,6 +37,7 @@
                                 </button>
                                 <div class="dropdown-content">
                                     <ul>
+                                        <li><a href="{% url 'main:documents_list' %}"><i class="fa-solid fa-folders"></i> Все документы</a></li>
                                         {% if perms.main.add_documents %}
                                             <li><a href="{% url 'main:create' %}"><i class="fa-solid fa-file"></i>
                                                 Добавить

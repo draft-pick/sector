@@ -1,16 +1,26 @@
 .counter {
-    margin-top: 20px;
+  margin-top: 20px;
 }
+
 .counter__row {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    .chars {
+  .chars {
+    width: 66%;
+  }
 
+  .total {
+    width: 34%;
+    color: $accent-color;
+    font-weight: 700;
+    text-align: center;
+    font-size: 30px;
+
+    .numbers {
+      margin-top: 10px;
+      font-size: 60px;
+      font-family: $numbers-font;
     }
-
-    .total {
-
-
-    }
+  }
 }

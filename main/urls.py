@@ -7,7 +7,8 @@ from .views import (index,
                     detail_user,
                     doc_favorite,
                     doc_unfavorite,
-                    SearchResultsView
+                    SearchResultsView,
+                    documents_list,
                     )
 
 app_name = 'main'
@@ -21,4 +22,6 @@ urlpatterns = [
     path('<int:doc_id>/favorite/', doc_favorite, name='doc_favorite'),
     path('<int:doc_id>/unfavorite/', doc_unfavorite, name='doc_unfavorite'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
+    path('documents_list/', documents_list, name='documents_list'),
+
 ]

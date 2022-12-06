@@ -39,6 +39,19 @@ def index(request):
 
 
 @login_required()
+def documents_list(request):
+    """Список всех документов с фильтрами."""
+    sort = request.GET.getlist('sort')
+    documents = Documents.objects.all().order_by(*sort)
+
+    context = {
+        'title': 'Список всех документов',
+        'documents': documents,
+    }
+
+    return render(request, 'main/documents_list.html', context)
+
+@login_required()
 def create_type(request):
     """Добавить новый тип документа."""
     types = Type.objects.all()

@@ -4,7 +4,7 @@
     <section class="search">
         <div class="container">
             <div class="search__row">
-                <form action="{% url 'main:search_results' %}" method="get">
+                <form class="search-form" action="{% url 'main:search_results' %}" method="get">
                     <label for="search">
                         <i class="fa-light fa-file-magnifying-glass"></i>
                     </label>
@@ -100,7 +100,8 @@
                     </script>
                 </div>
                 <div class="total">
-                    {{ documents.count }}
+                    Общее количество документов:
+                    <div class="numbers">{{ documents.count }}</div>
                 </div>
             </div>
 

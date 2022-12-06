@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="documents_list">
+        <div class="container">
+
+            <form method="get">
+                <ul>
+                    <li>
+                        <button type="submit" name="sort" value="-date_create">По дате создания</button>
+                    </li>
+                    <li>
+                        <button type="submit" name="sort" value="title">По наименованию</button>
+                    </li>
+                    <li>
+                        <button type="submit" name="sort" value="-pub_date">По дате публикации</button>
+                    </li>
+                </ul>
+            </form>
+
+            {#            <div class="text-center">#}
+            {#                <ul>#}
+            {#                    <li><i class="fa-light fa-folder-open"></i></li>#}
+            {#                    <li><i class="fa-light fa-calendar-days"></i></li>#}
+            {#                    <li><i class="fa-light fa-clock"></i></li>#}
+            {#                </ul>#}
+            {#            </div>#}
+            <hr>
+            <div class="documents__row">
+                {% for document in documents %}
+                    <div class="item">
+                        <button>
+                            {{ document.date_create }}<br>
+                            {{ document.title }}<br>
+                            {{ document.pub_date }}
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

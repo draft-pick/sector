@@ -1,0 +1,16 @@
+.documents_list {
+  ul li {
+    display: inline;
+  }
+  .documents__row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .item {
+      max-width: 33.3%;
+      flex: 0 0 33.3%;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
+}
