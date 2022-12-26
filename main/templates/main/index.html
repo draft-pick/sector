@@ -1,61 +1,88 @@
 {% extends 'base.html' %}
-
 {% block content %}
-    <section class="search">
-        <div class="container">
-            <div class="search__row">
-                <form class="search-form" action="{% url 'main:search_results' %}" method="get">
-                    <label for="search">
-                        <i class="fa-light fa-file-magnifying-glass"></i>
-                    </label>
-                    <input name="q" type="text" id="search" placeholder="...Поиск...">
-                </form>
-            </div>
-        </div>
-    </section>
-
-
     <section class="slider_main">
         <div class="container">
             <div class="slider_main__row">
+                <div class="title">
+                    <h1>Последние документы</h1>
+                </div>
                 <div class="owl-carousel main">
-                    {% for document in documents %}
+                    {% for document in documents_last %}
                         <a href="{% url 'main:detail' document.pk %}">
                             <div class="main__item">
                                 <div class="header">
-                                    <div class="type">
-                                        {{ document.type }}
-                                        <div class="favorites">
-                                            {% if document.pk in favorites %}
-                                                <object>
-                                                    <a href="{% url 'main:doc_unfavorite' document.pk %}"
-                                                       class="favorites" style="font-size:28px;color: darkred;">
-                                                        <i class="fa-sharp fa-solid fa-heart"></i>
-                                                    </a>
-                                                </object>
-                                            {% else %}
-                                                <object>
-                                                    <a href="{% url 'main:doc_favorite' document.pk %}"
-                                                       class="favorites"
-                                                       style="font-size:28px;color: lightgray;">
-                                                        <i class="fa-sharp fa-solid fa-heart"></i>
-                                                    </a>
-                                                </object>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="date">{{ document.date_create }}</div>
-                                </div>
-                                <div class="title">
                                     {{ document.title|slice:":150" }}
                                 </div>
+                                <div class="info">
+                                    <div class="tags" style="color: {{ document.type.color }};">
+                                        <span>{{ document.type }}</span>
+                                    </div>
+                                    <div class="date"><i class="fa-light fa-calendars"></i>
+                                        от {{ document.date_create }}
+                                    </div>
+                                    <div class="number"><i class="fa-light fa-hashtag"></i> {{ document.number }}</div>
+                                    <div class="executor">
+                                        <i class="fa-regular fa-user-check"></i>
+                                        {% if document.executor %}
+                                            {{ document.executor }}
+                                        {% else %}
+                                            не назначен
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+
                                 <div class="footer">
-                                    <div class="number">№ - {{ document.number }}</div>
-                                    <div class="more"><img src="/static/img/icons/arrow-right.svg" alt=""></div>
+                                    <div class="favorites">
+                                        {% if document.pk in favorites %}
+                                            <object>
+                                                <a href="{% url 'main:doc_unfavorite' document.pk %}"
+                                                   class="favorites">
+                                                    <button class="btn-fav" id="{{ document.pk }}">
+                                                        <i class="fa-regular fa-check"></i> Документ в избранном
+                                                    </button>
+                                                </a>
+                                            </object>
+                                        {% else %}
+                                            <object>
+                                                <a href="{% url 'main:doc_favorite' document.pk %}"
+                                                   class="favorites">
+                                                    <button class="btn-fav" id="{{ document.pk }}">
+                                                        <i class="fa-regular fa-plus"></i> Добавить в избранное
+                                                    </button>
+                                                </a>
+                                            </object>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </a>
                     {% endfor %}
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            $('.btn-fav').click(function (e) {
+                                e.preventDefault()
+                                const doc_id = $(this).attr('id')
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/',
+                                    data: {
+                                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                                        'doc_id': doc_id,
+                                    },
+                                    success: function (response){
+                                        console.log('success')
+                                    },
+                                    error: function (response){
+                                        console.log('error', response)
+                                    }
+
+                                })
+                            })
+                        });
+                    </script>
                 </div>
             </div>
         </div>
@@ -63,6 +90,9 @@
 
     <section class="counter">
         <div class="container">
+            <div class="title">
+                <h1>Статистика</h1>
+            </div>
             <div class="counter__row">
                 <div class="chars">
                     <canvas id="myChart"></canvas>
@@ -81,9 +111,9 @@
                                 datasets: [{
                                     data: {{ type_count }},
                                     backgroundColor: [
-                                        'rgb(255, 99, 132)',
-                                        'rgb(54, 162, 235)',
-                                        'rgb(255, 205, 86)',
+                                        'rgb(255, 159, 180)',
+                                        'rgb(111, 185, 235)',
+                                        'rgb(255, 217, 127)',
                                         'rgb(255, 05, 186)',
                                     ],
                                     hoverOffset: 4
@@ -100,7 +130,11 @@
                     </script>
                 </div>
                 <div class="total">
-                    Общее количество документов:
+                    <ul>
+                        {% for t in documents %}
+                            <li>{{ t.type.count }}</li>
+                        {% endfor %}
+                    </ul>
                     <div class="numbers">{{ documents.count }}</div>
                 </div>
             </div>
@@ -108,3 +142,4 @@
         </div>
     </section>
 {% endblock %}
+

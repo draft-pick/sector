@@ -1,4 +1,17 @@
 .login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .title {
+    color: #BABECC;
+    text-shadow: 1px 1px 1px #fff;
+    text-align: center;
+    font-weight: 900;
+    font-size: 40px;
+  }
+
   .alert {
     color: $accent-color;
     text-align: center;

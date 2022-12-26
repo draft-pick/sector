@@ -1,7 +1,22 @@
 .documents_list {
-  ul li {
-    display: inline;
+  .order__row {
+    text-align: center;
+
+    form {
+      display: inline;
+    }
+
+    .order {
+      background-color: $accent-color;
+      font-weight: 400;
+      text-shadow: none;
+      color: #fff;
+      padding: 5px 10px;
+      box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
+      font-size: 14px;
+    }
   }
+
   .documents__row {
     display: flex;
     flex-wrap: wrap;
@@ -11,6 +26,46 @@
       flex: 0 0 33.3%;
       font-size: 14px;
       margin-bottom: 10px;
+      padding: 10px;
+
+      .card {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        height: 150px;
+
+        .header {
+          color: grey;
+          font-family: $numbers-font;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .favorite {
+            font-size: 14px;
+          }
+        }
+
+        .title {
+          height: 80px;
+          display: flex;
+          align-items: center;
+        }
+
+        .footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .number {
+            font-family: $numbers-font;
+          }
+
+          .type {
+            color: $accent-color;
+          }
+        }
+      }
     }
   }
 }

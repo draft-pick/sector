@@ -1,36 +1,68 @@
 .detail_area__row {
   display: flex;
+  margin-bottom: 20px;
 
   .info {
-    padding: 20px;
     width: 66%;
     margin-right: 50px;
     color: #61677C;
-    box-shadow: -5px -5px 20px $color-white, 5px 5px 20px $color-shadow;
-    transition: all 0.2s ease-in-out;
     font-size: 18px;
 
-    button {
-      margin: 0 7px 10px 0;
-      color: $accent-color;
-      width: 50px;
-      height: 50px;
-      font-weight: 400;
+    li {
+      padding-bottom: 15px;
     }
 
-    &:hover {
-      box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
+    span {
+      color: gray;
+    }
+
+    a {
+      color: $accent-color;
     }
   }
 
   .include_doc {
     width: 34%;
 
-    li {
-      margin-bottom: 10px;
-      padding: 20px;
-      box-shadow: -5px -5px 20px $color-white, 5px 5px 20px $color-shadow;
+    .comment__row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid lightgray;
 
+      .alert {
+        font-size: 20px;
+        color: $alternative-color;
+      }
     }
+
+    .comment {
+      padding: 0 0 0 10px;
+    }
+
+    .include_doc__row {
+      display: flex;
+
+      .alert {
+        font-size: 20px;
+        color: $alternative-color;
+      }
+
+      li {
+        margin-bottom: 10px;
+        padding: 0 0 0 10px;
+
+      }
+
+      a {
+        color: $accent-color;
+      }
+    }
+  }
+
+  button {
+    width: 50px;
+    height: 50px;
+    color: $accent-color;
   }
 }

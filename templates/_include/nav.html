@@ -1,20 +1,72 @@
-<nav class="nav">
-    <div class="container">
-        <div class="nav__row">
-            <div class="logo">
-                <a href="/">
-                    <button class="logo unit" type="button"><img src="/static/img/logo.svg" alt="logo"> Sector</button>
+{% if request.path != '/auth/login/' and request.path != '/auth/logout/' %}
+    <nav class="nav">
+        <div class="container">
+            <div class="nav__row">
+                <div class="logo">
+                    <a href="/">
+                        <button class="nav-button logo" type="button"><img src="/static/img/logo.svg" alt="logo"></button>
+                    </a>
+                </div>
+                <div class="navigation-list">
+                    <ul>
+                        <li>
+                            <div class="btn-more">
+                                <button class="nav-button more" tooltip="Поиск" flow="left"><i
+                                        class="fa-light fa-magnifying-glass"></i></button>
+                                <div class="dropdown-search">
+                                    <div class="search-area">
+                                        <div class="search__row">
+                                            <form class="search-form" action="{% url 'main:search_results' %}"
+                                                  method="get">
+                                                <label for="search">
+                                                    <i class="fa-light fa-magnifying-glass"></i>
+                                                </label>
+                                                <input name="q" type="text" id="search" placeholder="...Поиск...">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
 
-                </a>
-            </div>
-            <div class="navigation-list">
-                <ul>
-                    {% if user.is_authenticated %}
+                        <li>
+                            <div class="btn-more">
+                                <button class="nav-button more" tooltip="Добавить"><i
+                                        class="fa-light fa-file-circle-plus"></i></button>
+                                <div class="dropdown-add">
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'main:create' %}"><i class="fa-light fa-file"></i>
+                                                Добавить документ
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'main:create_type' %}"><i class="fa-light fa-folder"></i>
+                                                Добавить категорию
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'main:create_executor' %}"><i class="fa-light fa-user-vneck"></i>
+                                                Добавить исполнителя
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:documents_list' %}">
+                                <button class="nav-button" tooltip="Все документы" flow="down"><i
+                                        class="fa-light fa-folders"></i>
+                                </button>
+                            </a>
+                        </li>
                         <li>
                             <a href="{% url 'main:detail_user' user.pk %}">
-                                <button class="user unit" type="button">
+                                <button class="user unit" type="button" tooltip="Страница пользователя" flow="down">
                                     <div class="icon">
-                                        <i class="fa-solid fa-user"></i>
+                                        <i class="fa-light fa-user"></i>
                                     </div>
                                     <div class="info">
                                         <div>{{ user.first_name }} {{ user.last_name }}</div>
@@ -32,31 +84,15 @@
                             </a>
                         </li>
                         <li>
-                            <div class="btn-more">
-                                <button class="more unit" type="button"><i class="fa-solid fa-ellipsis-vertical"></i>
-                                </button>
-                                <div class="dropdown-content">
-                                    <ul>
-                                        <li><a href="{% url 'main:documents_list' %}"><i class="fa-solid fa-folders"></i> Все документы</a></li>
-                                        {% if perms.main.add_documents %}
-                                            <li><a href="{% url 'main:create' %}"><i class="fa-solid fa-file"></i>
-                                                Добавить
-                                                документ</a></li>
-                                        {% endif %}
-                                        {% if perms.main.add_type %}
-                                            <li><a href="{% url 'main:create_type' %}"><i
-                                                    class="fa-solid fa-folder"></i>
-                                                Добавить тип</a></li>
-                                        {% endif %}
-                                        <li><a href="{% url 'users:logout' %}"><i
-                                                class="fa-solid fa-right-from-bracket"></i> Выход</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <a href="{% url 'users:logout' %}">
+                                <button class="nav-button" tooltip="Выйти" flow="down"><i
+                                        class="fa-light fa-arrow-right-from-arc"></i></button>
+                            </a>
                         </li>
-                    {% endif %}
-                </ul>
+
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
+{% endif %}

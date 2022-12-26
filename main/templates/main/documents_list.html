@@ -3,37 +3,57 @@
 {% block content %}
     <section class="documents_list">
         <div class="container">
+            <div class="order__row mb-1">
+                <form method="get">
+                    <button class="order" type="submit" name="sort" value="-date_create">По дате создания</button>
+                    <button class="order" type="submit" name="sort" value="title">По наименованию</button>
+                    <button class="order" type="submit" name="sort" value="-pub_date">По дате публикации</button>
 
-            <form method="get">
-                <ul>
-                    <li>
-                        <button type="submit" name="sort" value="-date_create">По дате создания</button>
-                    </li>
-                    <li>
-                        <button type="submit" name="sort" value="title">По наименованию</button>
-                    </li>
-                    <li>
-                        <button type="submit" name="sort" value="-pub_date">По дате публикации</button>
-                    </li>
-                </ul>
-            </form>
+                </form>
+{#                <form method="get">#}
+{#                    <select name="search" onchange="this.form.submit()">#}
+{#                        {% for type in types %}#}
+{#                            <option value="{{ type.title }}" name="search">{{ type.title }}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </form>#}
 
-            {#            <div class="text-center">#}
-            {#                <ul>#}
-            {#                    <li><i class="fa-light fa-folder-open"></i></li>#}
-            {#                    <li><i class="fa-light fa-calendar-days"></i></li>#}
-            {#                    <li><i class="fa-light fa-clock"></i></li>#}
-            {#                </ul>#}
-            {#            </div>#}
-            <hr>
+            </div>
             <div class="documents__row">
                 {% for document in documents %}
                     <div class="item">
-                        <button>
-                            {{ document.date_create }}<br>
-                            {{ document.title }}<br>
-                            {{ document.pub_date }}
-                        </button>
+                        <a href="{% url 'main:detail' document.pk %}">
+                            <div class="card">
+                                <div class="header">
+                                    <div class="date">от {{ document.date_create }}</div>
+                                    <div class="favorite">
+                                        {% if document.pk in favorites %}
+                                            <object>
+                                                <a href="{% url 'main:doc_unfavorite' document.pk %}"
+                                                   class="favorites" style="font-size:28px;color: darkred;">
+                                                    <i class="fa-sharp fa-solid fa-heart"></i>
+                                                </a>
+                                            </object>
+                                        {% else %}
+                                            <object>
+                                                <a href="{% url 'main:doc_favorite' document.pk %}"
+                                                   class="favorites"
+                                                   style="font-size:28px;color: lightgray;">
+                                                    <i class="fa-sharp fa-solid fa-heart"></i>
+                                                </a>
+                                            </object>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="title">
+                                    {{ document.title|slice:":150" }}
+                                </div>
+                                <div class="footer">
+                                    <div class="type">{{ document.type }}</div>
+                                    <div class="number">{{ document.number }}</div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 {% endfor %}
             </div>

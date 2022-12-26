@@ -1,0 +1,41 @@
+.executor-area {
+  display: flex;
+  justify-content: center;
+  .title h1{
+    font-size: 20px;
+    margin: 5px 0;
+  }
+  .executor-list {
+    text-align: left;
+
+    ul {
+      display: block;
+      margin-left: -10px;
+    }
+
+    ul li {
+      display: block;
+      position: relative;
+    }
+
+    ul li:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    ul li:before {
+      content: "";
+      position: absolute;
+      top: 1.2em;
+      left: -30px;
+      margin-top: -.9em;
+      background: $alternative-color;
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+    }
+
+  }
+  .executor-form {
+    padding: 0 30px;
+  }
+}

@@ -1,5 +1,14 @@
 .counter {
   margin-top: 20px;
+
+  .title h1 {
+    color: #BABECC;
+    text-shadow: 1px 1px 1px #fff;
+    text-align: left;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+  }
 }
 
 .counter__row {
@@ -12,12 +21,24 @@
 
   .total {
     width: 34%;
-    color: $accent-color;
-    font-weight: 700;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
+    color: #888;
+    background-color: #EBECF0;
+    box-shadow: -5px -5px 20px $color-white, 5px 5px 20px $color-shadow;
+    padding: 18px 20px;
+    margin-top: 15px;
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+    display: block;
+
+    &:hover {
+      box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
+    }
 
     .numbers {
+      color: $accent-color;
+      font-weight: 900;
       margin-top: 10px;
       font-size: 60px;
       font-family: $numbers-font;

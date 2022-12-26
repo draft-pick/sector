@@ -1,7 +1,11 @@
 from django import forms
-from django.forms import ModelForm, TextInput, Textarea, FileInput, ImageField, Select
+from django.forms import (
+    TextInput,
+    FileInput,
+    NumberInput,
+)
 
-from .models import Documents, Type
+from .models import Documents, Type, Executor
 
 
 class TypeForm(forms.ModelForm):
@@ -13,37 +17,37 @@ class TypeForm(forms.ModelForm):
 
 
 class DocumentForm(forms.ModelForm):
-    type = forms.ModelChoiceField(queryset = Type.objects.all(),
-                                  widget=forms.Select(attrs={'class':'select'}),
-                                  empty_label='---Выберете тип---'
+    type = forms.ModelChoiceField(queryset=Type.objects.all(),
+                                  widget=forms.Select(attrs={'class': 'select'}),
+                                  empty_label='---Выберете категорию---'
                                   )
     number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер'}))
-    date_create = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Дата создания'}))
+    date_create = forms.DateField(widget=NumberInput(attrs={'type': 'date'}))
+    executor = forms.ModelChoiceField(queryset=Executor.objects.all(),
+                                      widget=forms.Select(attrs={'class': 'select'}),
+                                      empty_label='---Выберете исполнителя---',
+                                      required=False
+                                      )
 
     class Meta:
         model = Documents
-        fields = ('type', 'title', 'number', 'date_create', 'file',)
+        fields = ('type', 'title', 'number', 'date_create', 'executor', 'file')
 
         widgets = {
-            'type': Select(attrs={
-                'class': 'select',
-                'placeholder': 'Тип документа',
-            }),
             'title': TextInput(attrs={
                 'placeholder': 'Название'
             }),
             'file': FileInput(attrs={
                 'class': 'file',
-                'placeholder': 'Файлы',
+                'placeholder': 'Добавить файл',
             }),
 
         }
 
-        # help_texts = {
-        #     'text': 'Текст нового поста',
-        #     'group': 'Группа, к которой будет относиться пост'
-        # }
-        # labels = {
-        #     'text': 'Текст поля',
-        #     'group': 'Группа'
-        # }
+
+class ExecutorForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'ФИО'}))
+
+    class Meta:
+        model = Executor
+        fields = ('name',)

@@ -4,7 +4,6 @@ $(document).ready(function () {
         margin: 10, //Отступ от картино если выводите больше 1
         autoplay:false, //Автозапуск слайдера
         dots: true,
-        loop: true,
         smartSpeed: 1000, //Время движения слайда
         autoplayTimeout: 2000, //Время смены слайда
         responsive: {

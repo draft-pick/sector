@@ -15,20 +15,6 @@ button {
 }
 
 button {
-  color: #61677C;
-  font-weight: bold;
-  box-shadow: -5px -5px 20px $color-white, 5px 5px 20px $color-shadow;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  font-weight: 600;
-
-  &:hover {
-    box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
-  }
-
-  &:active {
-    box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
-  }
 
   .icon {
     margin-right: $ruler/2;
@@ -42,14 +28,59 @@ button {
     margin: 0 $ruler/2;
     font-size: $ruler*1.1;
 
+
     .icon {
       margin-right: 0;
     }
   }
 
+  &.favorite {
+    background-color: #F0F3FF;
+    color: #4A61DD;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #D8DEFF;
+    }
+  }
+
+  &.nav-button {
+    border-radius: $ruler/2;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    color: $alternative-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: -5px -5px 20px $color-white, 5px 5px 20px $color-shadow;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
+
+
+    &:hover {
+      box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
+    }
+
+    &:active {
+      box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+    }
+
+    &.logo {
+      width: 100%;
+      display: flex;
+    }
+
+  }
+
   &.user {
-    color: $accent-color;
+    color: $alternative-color;
     width: 100%;
+    height: 50px;
     display: flex;
 
     .icon {
@@ -61,7 +92,7 @@ button {
       font-size: 16px;
 
       .rules {
-        font-size: 14px;
+        font-size: 12px;
         text-align: right;
         color: #61677C;
       }
@@ -69,18 +100,4 @@ button {
 
   }
 
-  &.more {
-    height: 100%;
-  }
-
-  &.logo {
-    width: 100%;
-    display: flex;
-  }
-
-  &.red {
-    display: block;
-    width: 100%;
-    color: $color-red;
-  }
 }

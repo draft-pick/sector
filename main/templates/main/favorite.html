@@ -1,0 +1,16 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('#fav-btn').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/",
+               data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+               dataType: "json",
+               success: function(response) {
+                      alert(response.message);
+                      alert('Company likes count is now ');
+                },
+        });
+    });
+</script>

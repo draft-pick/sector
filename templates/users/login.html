@@ -2,6 +2,9 @@
 {% block content %}
     <section class="login">
         <div class="container">
+            <div class="title">
+                Авторизация
+            </div>
             {% if form.errors %}
                 {% for field in form %}
                     {% for error in field.errors %}

@@ -30,21 +30,104 @@
                             </div>
                         </form>
                     </div>
-                {% elif not is_type %}
+                {% elif is_doc %}
                     {% load user_filters %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            alert('{{ message }}')
+                        {% endfor %}
+                    {% endif %}
                     <form method="post"
                           enctype="multipart/form-data"
                           action="{% url 'main:create' %}">
                         {% csrf_token %}
                         {% for field in form %}
                             {{ field.title }}
-                                <label for="{{ field.id_for_label }}">
-                                    {{ field }}
-                                </label>
+                            <label for="{{ field.id_for_label }}">
+                                {{ field }}
+                            </label>
                         {% endfor %}
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa-solid fa-file-plus"></i> Добавить
+                            </button>
+                        </div>
+                    </form>
+                {% elif is_executor %}
+                    <div class="executor-area">
+                        <div class="executor-list">
+                            <div class="title"><h1>Список добавленных исполнителей</h1></div>
+                            <ul>
+                                {% for executor in executors %}
+                                    <li>{{ executor.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="executor-form">
+                            <div class="title"><h1>Форма создания</h1></div>
+
+                            <form method="post"
+                                  enctype="multipart/form-data"
+                                  action="{% url 'main:create_executor' %}">
+                                {% csrf_token %}
+                                {% for field in executor_form %}
+                                    <div class="form-group row my-3">
+                                        <label for="{{ field.id_for_label }}">
+                                            {{ field }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="red">
+                                        <i class="fa-regular fa-file-import"></i> Добавить
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% elif is_include %}
+                    {% load user_filters %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            alert('{{ message }}')
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post"
+                          enctype="multipart/form-data"
+                          action="{% url 'main:create_include' document_detail.pk %}">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {{ field.title }}
+                            <label for="{{ field.id_for_label }}">
+                                {{ field }}
+                            </label>
+                        {% endfor %}
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-file-plus"></i> Добавить
+                            </button>
+                        </div>
+                    </form>
+                {% elif is_edit %}
+                    {% load user_filters %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            alert('{{ message }}')
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post"
+                          enctype="multipart/form-data"
+                          action="{% url 'main:edit_document' document_edit.pk %}">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {{ field.title }}
+                            <label for="{{ field.id_for_label }}">
+                                {{ field }}
+                            </label>
+                        {% endfor %}
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-file-plus"></i> Изменить
                             </button>
                         </div>
                     </form>

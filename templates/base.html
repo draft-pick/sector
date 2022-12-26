@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,400;0,700;0,900;1,100;1,400&display=swap"
           rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap" rel="stylesheet">
     <!-- FontAwesome JS-->
     <link rel="stylesheet" href="{% static '/fontawesomepro/css/all.min.css' %}" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 {% include '_include/nav.html' %}
-{% include '_include/title.html' %}
+{% if request.path != '/' and request.path != '/auth/login/' and request.path != '/auth/logout/' %}
+    {% include '_include/title.html' %}
+{% endif %}
 {% block content %}
 
 {% endblock %}

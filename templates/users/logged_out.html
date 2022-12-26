@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="text-center">
-        <button>
-            <a href="{% url 'users:login' %}"><i class="fa-solid fa-right-to-bracket"></i> Авторизоваться</a>
-        </button>
-    </div>
+    <section class="logout">
+        <div class="container">
+            <div class="title">
+                Вы завершили работу
+            </div>
+            <div class="text-center">
+                <a href="{% url 'users:login' %}">
+                    <button>
+                        <i class="fa-solid fa-right-to-bracket"></i> Авторизоваться
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
 {% endblock %} 

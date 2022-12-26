@@ -2,12 +2,18 @@
 
 {% block content %}
     <div class="container">
-        <ul>
-            {% for doc in object_list %}
-                <li>
-                    <a href="{% url 'main:detail' doc.pk %}"><button class="mb-1 w-100">{{ doc.title }}</button></a>
-                </li>
-            {% endfor %}
-        </ul>
+        {% if object_list %}
+            <ul>
+                {% for doc in object_list %}
+                    <li>
+                        <a href="{% url 'main:detail' doc.pk %}">
+                            <button class="mb-1 w-100">{{ doc.title }}</button>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            Ничего не найдено! Попробуйте изменить формулировку.
+        {% endif %}
     </div>
 {% endblock %}
