@@ -23,6 +23,7 @@
 {% if request.path != '/' and request.path != '/auth/login/' and request.path != '/auth/logout/' %}
     {% include '_include/title.html' %}
 {% endif %}
+{% include '_include/permissions.html' %}
 {% block content %}
 
 {% endblock %}

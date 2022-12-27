@@ -24,7 +24,3 @@ class RoleUsers(models.Model):
     class Meta:
         verbose_name = 'Роль'
         verbose_name_plural = 'Роли'
-
-
-
-

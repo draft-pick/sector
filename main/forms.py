@@ -9,7 +9,9 @@ from .models import Documents, Type, Executor
 
 
 class TypeForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название'}))
+    title = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Название'})
+    )
 
     class Meta:
         model = Type
@@ -17,17 +19,23 @@ class TypeForm(forms.ModelForm):
 
 
 class DocumentForm(forms.ModelForm):
-    type = forms.ModelChoiceField(queryset=Type.objects.all(),
-                                  widget=forms.Select(attrs={'class': 'select'}),
-                                  empty_label='---Выберете категорию---'
-                                  )
-    number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер'}))
-    date_create = forms.DateField(widget=NumberInput(attrs={'type': 'date'}))
-    executor = forms.ModelChoiceField(queryset=Executor.objects.all(),
-                                      widget=forms.Select(attrs={'class': 'select'}),
-                                      empty_label='---Выберете исполнителя---',
-                                      required=False
-                                      )
+    type = forms.ModelChoiceField(
+        queryset=Type.objects.all(),
+        widget=forms.Select(attrs={'class': 'select'}),
+        empty_label='---Выберете категорию---'
+    )
+    number = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Номер'})
+    )
+    date_create = forms.DateField(
+        widget=NumberInput(attrs={'type': 'date'})
+    )
+    executor = forms.ModelChoiceField(
+        queryset=Executor.objects.all(),
+        widget=forms.Select(attrs={'class': 'select'}),
+        empty_label='---Выберете исполнителя---',
+        required=False
+    )
 
     class Meta:
         model = Documents
@@ -46,7 +54,9 @@ class DocumentForm(forms.ModelForm):
 
 
 class ExecutorForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'ФИО'}))
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'ФИО'})
+    )
 
     class Meta:
         model = Executor

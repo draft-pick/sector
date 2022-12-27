@@ -5,10 +5,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Count, Q
 from django.views.generic import ListView
 from django.contrib.auth import get_user_model
-from django.contrib import messages
 
 from .models import Type, Documents, Favorites, Executor
-from users.models import RoleUsers
 from .forms import TypeForm, DocumentForm, ExecutorForm
 
 User = get_user_model()
@@ -18,7 +16,8 @@ User = get_user_model()
 def index(request):
     """Главная страница."""
     documents = Documents.objects.all()
-    favorites = Favorites.objects.filter(user__username=request.user).values_list('document_id', flat=True)
+    favorites = Favorites.objects.filter(
+        user__username=request.user).values_list('document_id', flat=True)
     types = Type.objects.annotate(sum_documents=Count('type_document'))
 
     def count_documents():
@@ -48,7 +47,8 @@ def documents_list(request):
     documents = Documents.objects.all().order_by(*sort)
     search = request.GET.getlist('search')
     type_search = types.filter(*search)
-    favorites = Favorites.objects.filter(user__username=request.user).values_list('document_id', flat=True)
+    favorites = Favorites.objects.filter(
+        user__username=request.user).values_list('document_id', flat=True)
 
     context = {
         'title': 'Список всех документов',
@@ -62,6 +62,7 @@ def documents_list(request):
 
 
 @login_required()
+@permission_required('main.add_type', raise_exception=True)
 def create_type(request):
     """Добавить новый тип документа."""
     types = Type.objects.all()
@@ -80,6 +81,7 @@ def create_type(request):
 
 
 @login_required()
+@permission_required('main.add_documents', raise_exception=True)
 def create_executor(request):
     """Добавить нового исполнителя."""
     executors = Executor.objects.all()
@@ -179,7 +181,8 @@ def detail(request, doc_id):
 def detail_user(request, user_id):
     """Страница пользователя"""
     user = get_object_or_404(User, pk=user_id)
-    favorites = Favorites.objects.filter(user__username=request.user).values_list('document_id', flat=True)
+    favorites = Favorites.objects.filter(
+        user__username=request.user).values_list('document_id', flat=True)
     context = {
         'title': f'Страница пользователя {user.first_name} {user.last_name}',
         'user': user,

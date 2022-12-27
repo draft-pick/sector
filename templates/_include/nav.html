@@ -4,7 +4,8 @@
             <div class="nav__row">
                 <div class="logo">
                     <a href="/">
-                        <button class="nav-button logo" type="button"><img src="/static/img/logo.svg" alt="logo"></button>
+                        <button class="nav-button logo" type="button"><img src="/static/img/logo.svg" alt="logo">
+                        </button>
                     </a>
                 </div>
                 <div class="navigation-list">
@@ -28,33 +29,38 @@
                                 </div>
                             </div>
                         </li>
+                        {% for role in user.user_role.all %}
+                            {% if role.roles == 'ADMIN' %}
+                                <li>
+                                    <div class="btn-more">
+                                        <button class="nav-button more" tooltip="Добавить"><i
+                                                class="fa-light fa-file-circle-plus"></i></button>
+                                        <div class="dropdown-add">
+                                            <ul>
+                                                <li>
+                                                    <a href="{% url 'main:create' %}"><i class="fa-light fa-file"></i>
+                                                        Добавить документ
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'main:create_type' %}"><i
+                                                            class="fa-light fa-folder"></i>
+                                                        Добавить категорию
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'main:create_executor' %}"><i
+                                                            class="fa-light fa-user-vneck"></i>
+                                                        Добавить исполнителя
+                                                    </a>
+                                                </li>
 
-                        <li>
-                            <div class="btn-more">
-                                <button class="nav-button more" tooltip="Добавить"><i
-                                        class="fa-light fa-file-circle-plus"></i></button>
-                                <div class="dropdown-add">
-                                    <ul>
-                                        <li>
-                                            <a href="{% url 'main:create' %}"><i class="fa-light fa-file"></i>
-                                                Добавить документ
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'main:create_type' %}"><i class="fa-light fa-folder"></i>
-                                                Добавить категорию
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'main:create_executor' %}"><i class="fa-light fa-user-vneck"></i>
-                                                Добавить исполнителя
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
                         <li>
                             <a href="{% url 'main:documents_list' %}">
                                 <button class="nav-button" tooltip="Все документы" flow="down"><i

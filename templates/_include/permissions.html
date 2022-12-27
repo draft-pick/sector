@@ -1,0 +1,8 @@
+{% for role in user.user_role.all %}
+    {% if role.roles == 'ADMIN' %}
+        {% block permissions %}
+
+
+        {% endblock %}
+    {% endif %}
+{% endfor %}

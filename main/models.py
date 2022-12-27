@@ -3,10 +3,13 @@ from uuid import uuid4
 
 from django.contrib.auth import get_user_model
 from django.db import models
+import datetime as dt
 
 # from validators import validate_file_extension, path_and_rename
 
 User = get_user_model()
+
+current = dt.datetime.now()
 
 
 def path_and_rename(path):
@@ -80,8 +83,7 @@ class Documents(models.Model):
     )
     file = models.FileField(
         blank=False,
-        upload_to=path_and_rename("documents/%Y/%m/%d/"),
-        # validators=[validate_file_extension]
+        upload_to=path_and_rename(f"documents/{current.year}/{current.month}"),
     )
     author = models.ForeignKey(
         User,

@@ -28,7 +28,9 @@ urlpatterns = [
     path('documents_list/', documents_list, name='documents_list'),
     path('detail/<int:doc_id>/edit', edit_document, name='edit_document'),
     path('detail_user/<int:user_id>', detail_user, name='detail_user'),
-    path('executor/<int:executor_id>', detail_executor, name='detail_executor'),
+    path(
+        'executor/<int:executor_id>', detail_executor, name='detail_executor'
+    ),
     path('<int:doc_id>/favorite/', doc_favorite, name='doc_favorite'),
     path('<int:doc_id>/unfavorite/', doc_unfavorite, name='doc_unfavorite'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
